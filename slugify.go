@@ -10,7 +10,6 @@ var (
 	defaultSlugger = New(Configuration{})
 )
 
-// Slugify creates the slug for a given value
 func Slugify(value string) string {
 	return defaultSlugger.Slugify(value)
 }
@@ -28,14 +27,12 @@ func validCharacter(c rune) bool {
 	return false
 }
 
-// Slugifier based on settings
 type Slugifier struct {
 	isValidCharacter func(c rune) bool
 	replaceCharacter rune
 	replacementMap   map[rune]string
 }
 
-// Slugify creates a slug for a string
 func (s Slugifier) Slugify(value string) string {
 
 	value = strings.ToLower(value)
@@ -43,16 +40,13 @@ func (s Slugifier) Slugify(value string) string {
 	lastCharacterWasInvalid := false
 
 	for len(value) > 0 {
-
 		c, size := utf8.DecodeRuneInString(value)
 		value = value[size:]
-
 		if newCharacter, ok := s.replacementMap[c]; ok {
 			buffer.WriteString(newCharacter)
 			lastCharacterWasInvalid = false
 			continue
 		}
-
 		if s.isValidCharacter(c) {
 			buffer.WriteRune(c)
 			lastCharacterWasInvalid = false
@@ -65,14 +59,12 @@ func (s Slugifier) Slugify(value string) string {
 	return strings.Trim(buffer.String(), string(s.replaceCharacter))
 }
 
-// Configuration is the basic configuration for Slugifier
 type Configuration struct {
 	IsValidCharacterChecker func(rune) bool
 	ReplaceCharacter        rune
 	ReplacementMap          map[rune]string
 }
 
-// New initialize a new slugifier
 func New(config Configuration) *Slugifier {
 	if config.IsValidCharacterChecker == nil {
 		config.IsValidCharacterChecker = validCharacter
