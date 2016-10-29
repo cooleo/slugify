@@ -1,21 +1,3 @@
-# Overview
-[![Twitter](https://img.shields.io/badge/author-%40MachielMolenaar-blue.svg)](https://twitter.com/MachielMolenaar)
-[![GoDoc](https://godoc.org/github.com/Machiel/slugify?status.svg)](https://godoc.org/github.com/Machiel/slugify)
-[![Build Status](https://drone.io/github.com/Machiel/slugify/status.png)](https://drone.io/github.com/Machiel/slugify/latest)
-
-Slugify is a small library that turns strings in to slugs.
-
-# License
-Slugify is licensed under a MIT license.
-
-# Installation
-A simple `go get github.com/Machiel/slugify` should suffice.
-
-# Usage
-
-## Example
-
-```go
 package main
 
 import (
@@ -55,4 +37,3 @@ func main() {
 
 	fmt.Println(replacementMapSlugifier.Slugify("a b")) // Will print: hello-hi
 }
-```
